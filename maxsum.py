@@ -16,7 +16,7 @@ def setglobalvar():
 	pointgroup = []
 
 
-def maxsum(num,n1,n2):
+def maxsum_h(num,n1,n2):
 	line = [0]*n2
 	max_sum = 0     #最大和
 	now_sum = 0     #当前和
@@ -24,7 +24,7 @@ def maxsum(num,n1,n2):
 		for i in range(0,n1):
 			for j in range(i,n1):
 				for k in range(0+l,n2+l):
-					k = k %n2
+					k = k % n2
 					line[k] += num[j][k]
 					if now_sum <0:
 						now_sum = 0
@@ -40,22 +40,24 @@ def maxsum_v(num,n1,n2):    #水平上相连
 	line = [0]*n2
 	max_sum = 0     #最大和
 	now_sum = 0     #当前和
-	for i in range(-n1,0):
-		for j in range(i,n1+i):
-			for k in range(0,n2):
-				line[k] += num[j][k]
-				if now_sum <0:
-					now_sum = 0
-				now_sum += line[k]
-				if now_sum > max_sum:
-					max_sum = now_sum
-			now_sum = 0
-		now_sum=0
-		line = [0]*n2
+	for l in range (0,n1):
+		for i in range(0,n1):
+			for j in range(i+l,n1+l):
+				for k in range(0,n2):
+					j = j % n1
+					line[k] += num[j][k]
+					if now_sum <0:
+						now_sum = 0
+					now_sum += line[k]
+					if now_sum > max_sum:
+						max_sum = now_sum
+				now_sum = 0
+			now_sum=0
+			line = [0]*n2
 	return max_sum
 
 
-def maxsum_h(num,n1,n2):
+def maxsum(num,n1,n2):
 	line = [0]*n2
 	max_sum = 0     #最大和
 	now_sum = 0     #当前和
@@ -78,20 +80,22 @@ def maxsum_vh(num,n1,n2):
 	line = [0]*n2
 	max_sum = 0     #最大和
 	now_sum = 0     #当前和
-	for l in range (0,n2):
-		for i in range(-n1,0):
-			for j in range(i,n1+i):
-				for k in range(0+l,n2+l):
-					k = k %n2
-					line[k] += num[j][k]
-					if now_sum <0:
-						now_sum = 0
-					now_sum += line[k]
-					if now_sum > max_sum:
-						max_sum = now_sum
-				now_sum = 0
-			now_sum=0
-			line = [0]*n2
+	for l1 in range (0,n1):
+		for l2 in range (0,n2):
+			for i in range(0,n1):
+				for j in range(i+l1,n1+l1):
+					for k in range(0+l2,n2+l2):
+						j = j % n1
+						k = k % n2
+						line[k] += num[j][k]
+						if now_sum <0:
+							now_sum = 0
+						now_sum += line[k]
+						if now_sum > max_sum:
+							max_sum = now_sum
+					now_sum = 0
+				now_sum=0
+				line = [0]*n2
 	return max_sum
 
 def searchthrough(x,y,num,now_sum):

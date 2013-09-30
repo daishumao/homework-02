@@ -7,26 +7,27 @@ class TestSequenceFunctions(unittest.TestCase):
 
     def setUp(self):
         self.syswrong = [[], ['sss.txt']] 
-        self.truewrong = [['input.txt'], ['\v','input.txt'], ['\h','input.txt'], ['\a','input.txt'], ['\v','\h','input.txt'], ['\v','\h','\a','input.txt']]
+        self.systrue = [['input_test.txt'], ['\\v','input_test.txt'], ['\\h','input_test.txt'], ['\\a','input_test.txt'], ['\\v','\\h','input_test.txt'], ['\\v','\\h','\\a','input_test.txt']]
 
     def test_wrong_sys(self):
-        for i in range(0, 2):
+        for i in range(0, 1):
             sys.argv[1:] = self.syswrong[i]
-            self.assertRaises(ValueError, homework02.main)
+            self.assertRaises(ValueError, maxsum.main)
     def test_true_sys(self):
-        for i in range(0,6):
+        for i in range(0,5):
+            sys.argv[1:] = self.systrue[i]
             if i==0:
-                self.assertEqual(maxsum.main(), 1221)
+                self.assertEqual(maxsum.main(), 689)
             elif i==1:
-                self.assertEqual(maxsum.main(), 1221)
+                self.assertEqual(maxsum.main(), 689)
             elif i==2:
-                self.assertEqual(maxsum.main(), 1221)
+                self.assertEqual(maxsum.main(), 753)
             elif i==3:
-                self.assertEqual(maxsum.main(), 1221)
+                self.assertEqual(maxsum.main(), 859)
             elif i==4:
-                self.assertEqual(maxsum.main(), 1498)
+                self.assertEqual(maxsum.main(), 753)
             elif i==5:
-                self.assertEqual(maxsum.main(), 1498)
+                self.assertEqual(maxsum.main(), 859)
 
 
 if __name__ == '__main__':
